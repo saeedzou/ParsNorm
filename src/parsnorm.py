@@ -24,7 +24,7 @@ from hazm import Normalizer as HazmNormalizer
 from parsivar import Normalizer as ParsiVarNormalizer
 from parsinorm import Mail_url_cleaner, Date_time_to_text, Abbreviation, Special_numbers
 from parsinorm import General_normalization as ParsiNormalizer
-from en_fa_transliterate import EnFaTransliterate
+from src.en_fa_transliterate import EnFaTransliterate
 
 class ParsNorm:
     """
