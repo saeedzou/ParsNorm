@@ -1,0 +1,4 @@
+hazm
+nltk
+parsinorm
+parsivar
