@@ -1,4 +1,4 @@
 hazm
 nltk
-parsinorm
+git+https://github.com/saeedzou/ParsiNorm.git
 git+https://github.com/saeedzou/Parsivar.git
