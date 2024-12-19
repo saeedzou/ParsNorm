@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='parsnorm',  # The name of your package
+    packages=['parsnorm'],
     version='0.1.0',  # Initial version
     description='Text Normalization Tool for Persian Speech Dataset Creation',
     long_description=open('README.md').read(),  # Read the README for a detailed description
