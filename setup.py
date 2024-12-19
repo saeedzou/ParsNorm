@@ -19,7 +19,6 @@ setup(
         'hazm',  # Example dependencies
         'parsivar',
         'parsinorm',
-        're',  # Python's regex module, usually already included, but can be added if necessary
     ],
     python_requires='>=3.6',
 )
