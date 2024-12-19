@@ -2,7 +2,6 @@ from setuptools import setup, find_packages
 
 setup(
     name='parsnorm',  # The name of your package
-    packages=['parsnorm'],
     version='0.1.0',  # Initial version
     description='Text Normalization Tool for Persian Speech Dataset Creation',
     long_description=open('README.md').read(),  # Read the README for a detailed description
@@ -10,7 +9,7 @@ setup(
     author='Saeedreza Zouashkiani',  # Replace with your name or the name of your team
     author_email='saeedzou2012@gmail.com',  # Replace with your email address
     url='https://github.com/saeedzou/ParsNorm',  # Replace with your GitHub URL
-    packages=find_packages(),  # Automatically find the packages in your project
+    packages=find_packages(where='parsnorm'),  # Automatically find the packages in your project
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
