@@ -17,7 +17,6 @@ setup(
     ],
     install_requires=[  # List the external dependencies
         'hazm',  # Example dependencies
-        'parsivar',
         'parsinorm',
     ],
     python_requires='>=3.6',
