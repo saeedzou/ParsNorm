@@ -26,23 +26,15 @@ from parsinorm import Mail_url_cleaner, Date_time_to_text, Abbreviation, Special
 from parsinorm import General_normalization as ParsiNormalizer
 from parsnorm.en_fa_transliterate import EnFaTransliterate
 
-SYMBOLS_PRONOUNCIATION = {
-    "%": "درصد",
-    "$": "دلار",
-    "€": "یورو",
-    "£": "پوند",
-    "¥": "ین",
-    "@": "ات ساین",
-    "+": "به علاوه",
-    "-": "منها",
-    "*": "ضربدر",
-    "/": "تقسیم بر",
-    "=": "مساوی",
-    "<": "کمتر از",
-    ">": "بیشتر از",
-    "∞": "بی‌نهایت",
-    "°C": "درجه سلسیوس",
-    "°F": "درجه فارنهایت"
+SYMBOLS_PRONUNCIATION = {
+    "%": " درصد",
+    "$": " دلار",
+    "€": " یورو",
+    "£": " پوند",
+    "¥": " ین",
+    "@": " ات ساین",
+    "°C": " درجه سلسیوس",
+    "°F": " درجه فارنهایت"
 }
 
 class ParsNorm:
@@ -184,8 +176,8 @@ class ParsNorm:
             text = self.date_time_to_text.date_to_text(text)
         
         if symbol_pronounciation:
-            for symbol, pronounciation in SYMBOLS_PRONOUNCIATION.items():
-                text = text.replace(symbol, pronounciation)
+            for symbol, pronunciation in SYMBOLS_PRONUNCIATION.items():
+                text = text.replace(symbol, pronunciation)
 
         if alphabet_correction:
             text = self.parsi_norm.alphabet_correction(text)
