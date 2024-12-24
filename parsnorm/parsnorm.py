@@ -26,6 +26,25 @@ from parsinorm import Mail_url_cleaner, Date_time_to_text, Abbreviation, Special
 from parsinorm import General_normalization as ParsiNormalizer
 from parsnorm.en_fa_transliterate import EnFaTransliterate
 
+SYMBOLS_PRONOUNCIATION = {
+    "%": "درصد",
+    "$": "دلار",
+    "€": "یورو",
+    "£": "پوند",
+    "¥": "ین",
+    "@": "ات ساین",
+    "+": "به علاوه",
+    "-": "منها",
+    "*": "ضربدر",
+    "/": "تقسیم بر",
+    "=": "مساوی",
+    "<": "کمتر از",
+    ">": "بیشتر از",
+    "∞": "بی‌نهایت",
+    "°C": "درجه سلسیوس",
+    "°F": "درجه فارنهایت"
+}
+
 class ParsNorm:
     """
     ParsNorm
@@ -88,6 +107,7 @@ class ParsNorm:
                   law_abbrev_replacement=True, book_abbrev_replacement=True, 
                   other_abbrev_replacement=True, english_abbrev_replacement=True,
                   number_conversion=True, en_fa_transliteration=True,
+                  symbol_pronounciation=True,
                   hazm=True):
         """
         Normalizes the input text using a combination of cleaning, correction, and
@@ -143,6 +163,8 @@ class ParsNorm:
             If True, converts numbers to textual form. Default is True.
         en_fa_transliteration : bool, optional
             If True, transliterates English words to Persian. Default is True.
+        symbol_pronounciation : bool, optional
+            If True, replaces symbols with their pronounciation. Default is True.
         hazm : bool, optional
             If True, applies hazm normalization. Default is True.
 
@@ -160,6 +182,10 @@ class ParsNorm:
             text = self.date_time_to_text.time_to_text(text)
         if convert_date:
             text = self.date_time_to_text.date_to_text(text)
+        
+        if symbol_pronounciation:
+            for symbol, pronounciation in SYMBOLS_PRONOUNCIATION.items():
+                text = text.replace(symbol, pronounciation)
 
         if alphabet_correction:
             text = self.parsi_norm.alphabet_correction(text)
