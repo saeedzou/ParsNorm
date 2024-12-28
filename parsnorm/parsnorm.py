@@ -175,6 +175,8 @@ class ParsNorm:
         if convert_date:
             text = self.date_time_to_text.date_to_text(text)
         
+        if repeated_punctuation_removal:
+            text = self.parsi_norm.remove_repeated_punctuation(text)
         if symbol_pronounciation:
             for symbol, pronunciation in SYMBOLS_PRONUNCIATION.items():
                 text = text.replace(symbol, pronunciation)
@@ -199,8 +201,6 @@ class ParsNorm:
             text = self.parsi_norm.remove_comma_between_numbers(text)
         if number_correction:
             text = self.parsi_norm.number_correction(text)
-        if repeated_punctuation_removal:
-            text = self.parsi_norm.remove_repeated_punctuation(text)
 
         if date_abbrev_replacement:
             text = self.abbreviation.replace_date_abbreviation(text)
