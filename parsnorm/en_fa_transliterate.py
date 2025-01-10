@@ -1,3 +1,4 @@
+import re
 import nltk
 from nltk.corpus import cmudict
 
@@ -60,16 +61,16 @@ IPA_TO_PINGLISH = {
     "l": "l", "v": "v", "p": "p", "r": "r",
     "g": "g", "m": "m", "h": "h", "ŋg": "ng",
     "w": "v", "j": "y", "u": "u", "tʃ": "ch", "dʒ": "j",
-    "ʃ": "sh", "ʒ": "zh", "θ": "th", "ð": "th", "ŋ": "ng",
+    "ʃ": "sh", "ʒ": "zh", "θ": "th1", "ð": "th2", "ŋ": "ng",
     "z": "z", "t": "t", "s": "s", "k": "k", "d": "d",
     "f": "f", "b": "b", "n": "n",
 }
 
 # Map Pinglish to Persian equivalents
 PINGLISH_TO_PERSIAN = {
-    "a": "ا", "l": "ل", "v": "و", "p": "پ", "r": "ر",
+    "l": "ل", "v": "و", "p": "پ", "r": "ر",
     "o": "و", "g": "گ", "m": "م", "h": "ه", "ei": "ای", "ing": "ینگ",
-    "ch": "چ", "sh": "ش", "zh": "ژ", "th": "ث", "j": "ج", "ng": "نگ",
+    "ch": "چ", "sh": "ش", "zh": "ژ", "th1": "ت", "th2": "د", "j": "ج", "ng": "نگ",
     "z": "ز", "t": "ت", "k": "ک", "d": "د",
     "f": "ف", "b": "ب", "n": "ن", "er": "ار", "e": "ی", "i": "ی",
     "u": "و", "a": "ا", "o": "او", "y": "ی",
@@ -81,9 +82,11 @@ PINGLISH_TO_PERSIAN = {
     "ae_start": "اَ",  # For the start of the word
     "ae_middle": "َ",  # For the middle of the word
     "ae_end":"ه",
+    "a_start": "آ",
+    "a_middle_end": "ا",
     # Mapping for 'o' with two cases
     "o_start": "اُ",   # For the start of the word
-    "o_middle": "ُ",   # For the middle of the word
+    "o_middle": "و",   # For the middle of the word
     "o_end": "و",
     # Mapping for 'e' with two cases
     "e_start": "اِ",   # For the start of the word
@@ -140,6 +143,54 @@ ARPABET_TO_IPA = {
     # Consonants - Semivowels
     'W': 'w', 'Y': 'j',
 }
+
+ENG_CHAR_TO_PER = {
+    'a': 'ای',
+    'b': 'بی',
+    'c': 'سی',
+    'd': 'دی',
+    'e': 'ای',
+    'f': 'اف',
+    'g': 'جی',
+    'h': 'اچ',
+    'i': 'آی',
+    'j': 'جی',
+    'k': 'کی',
+    'l': 'ال',
+    'm': 'ام',
+    'n': 'ان',
+    'o': 'او',
+    'p': 'پی',
+    'q': 'کیو',
+    'r': 'آر',
+    's': 'اس',
+    't': 'تی',
+    'u': 'یو',
+    'v': 'وی',
+    'w': 'دابلیو',
+    'x': 'ایکس',
+    'y': 'وای',
+    'z': 'زد',
+}
+
+
+def transliterate_abbreviations(text):
+    pattern = r'\b[a-zA-Z]+\b'
+    
+    def transliterate_word(word):
+        # Convert each character in the word to its Persian equivalent
+        return ' '.join(ENG_CHAR_TO_PER.get(char.lower(), char) for char in word)
+    
+    # Find all English words in the text
+    matches = re.findall(pattern, text)
+    
+    # Replace each English word with its transliterated Persian version
+    for match in matches:
+        transliterated = transliterate_word(match)
+        text = text.replace(match, transliterated)
+    
+    return text
+
 
 class EnFaTransliterate:
     def __init__(self, pinglish_normalizer):
@@ -231,6 +282,11 @@ class EnFaTransliterate:
                 length = 2
                 # Check position: Start, Middle, or End of the word
                 match = "sh"
+            elif pinglish_text[i:i+1] == "a":
+                if i == 0:
+                    match = "a_start"
+                else:
+                    match = "a_middle_end"
             elif pinglish_text[i:i+1] == "o":
                 # Check position: Start, Middle, or End of the word
                 if i == 0:
@@ -292,5 +348,6 @@ class EnFaTransliterate:
             persian_text = self.pinglish_normalizer.normalize(english_text)
             if persian_text in WEB_TO_FA.keys():
                 persian_text = WEB_TO_FA[persian_text]
+        persian_text = transliterate_abbreviations(persian_text)
         
         return persian_text

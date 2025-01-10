@@ -1,4 +1,6 @@
 hazm
 nltk
-git+https://github.com/saeedzou/ParsiNorm.git
+num2fawords
+persian-tools
+urlextract
 git+https://github.com/saeedzou/Parsivar.git

@@ -212,8 +212,6 @@ class ParsNorm:
             text = self.abbreviation.replace_book_abbreviation(text)
         if other_abbrev_replacement:
             text = self.abbreviation.replace_other_abbreviation(text)
-        if english_abbrev_replacement:
-            text = self.abbreviation.replace_English_abbrevations(text)
 
         if number_conversion:
             text = self.special_numbers.convert_numbers_to_text(text)
