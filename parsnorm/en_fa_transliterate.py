@@ -2,7 +2,24 @@ import re
 import nltk
 from nltk.corpus import cmudict
 
+
 nltk.download("cmudict")
+# Load the CMU Pronouncing Dictionary
+pronouncing_dict = cmudict.dict()
+
+# Add the word 'frightner' to a custom dictionary
+custom_dict = {
+    "frightner": [["F", "R", "AY1", "T", "N", "ER0"]],
+    "frightners": [["F", "R", "AY1", "T", "N", "ER0", "Z"]],
+    "hollyman": [["HH", "AA1", "L", "IY0", "M", "AE1", "N"]],
+    "avenger": [["AH0", "V", "EH1", "N", "JH", "ER0"]],
+    "avengers": [["AH0", "V", "EH1", "N", "JH", "ER0", "Z"]],
+    "Snowpiercer": [["S", "N", "OW1", "P", "IH1", "R", "S", "ER0"]],
+    "Snowpiercer": [["S", "N", "OW1", "P", "IH1", "R", "S", "ER0", "Z"]],
+    "revenant": [["R", "EH1", "V", "AH0", "N", "AH0", "NT"]],
+    "revenant": [["R", "EH1", "V", "AH0", "N", "AH0", "NT", "Z"]]
+}
+pronouncing_dict.update(custom_dict)
 
 WEB_TO_FA = {
     "http": "اچ تی تی پی",
@@ -57,7 +74,7 @@ WEB_TO_FA = {
 IPA_TO_PINGLISH = {
     "aɪ": "ai", "ɔɪ": "oy", "ʌ": "a", "oʊ": "o", "eɪ": "ey", "ɪŋ": "ing", "ɑː": "a", "æ": "æ", "ɑ":'a',
     "e": "e", "i": "i", "o": "o", "ɒ": "a", "ɜː": "er", "ə": "e", "ɜ": "e", "ʊ": "u", "aʊ":"ow",
-    "ɔː": "o", "uː": "u", "ɪ": "i", "ɛ": "e", "ɔ":"a",
+    "ɔː": "o", "uː": "u", "ɪ": "i", "ɛ": "e", "ɔ":"o",
     "l": "l", "v": "v", "p": "p", "r": "r",
     "g": "g", "m": "m", "h": "h", "ŋg": "ng",
     "w": "v", "j": "y", "u": "u", "tʃ": "ch", "dʒ": "j",
@@ -173,6 +190,12 @@ ENG_CHAR_TO_PER = {
     'z': 'زد',
 }
 
+def replace_web_words(text):
+    # Iterate over the dictionary and replace each word
+    for word, replacement in WEB_TO_FA.items():
+        # Use a word boundary to ensure we're replacing whole words only
+        text = re.sub(r'\b' + re.escape(word) + r'\b', replacement, text)
+    return text
 
 def transliterate_abbreviations(text):
     pattern = r'\b[a-zA-Z]+\b'
@@ -210,11 +233,12 @@ class EnFaTransliterate:
 
 
     # Function to convert word to IPA using CMU Pronouncing Dictionary and ARPAbet to IPA conversion
-    def word_to_ipa(self, word, d=cmudict.dict()):
+    def word_to_ipa(self, word, d=pronouncing_dict):
         # Get ARPAbet transcription from CMU dictionary
         word = word.lower()
         if word in d:
             arpabet_transcription = d[word][0]  # Take the first pronunciation
+            print(arpabet_transcription)
             ipa_transcription = self.arpabet_to_ipa_conversion(arpabet_transcription)
             return ipa_transcription
         else:
@@ -311,7 +335,7 @@ class EnFaTransliterate:
                     match = "i_middle_end"
             elif pinglish_text[i:i+1] == "s":
                 # Check position: Start, Middle, or End of the word
-                if i == 0 and pinglish_text[i+1] not in "aeoui":
+                if i == 0 and pinglish_text[i+1] not in "aeouiæ":
                     match = "s_start"
                 else:
                     match = "s_middle_end"
@@ -335,19 +359,17 @@ class EnFaTransliterate:
         return persian
 
 
-    def normalizer(self, english_text):
+    def normalizer(self, text):
         """Convert English text to Persian pronunciation."""
         # Convert English text to IPA
-        ipa_text = self.word_to_ipa(english_text)
+        ipa_text = self.word_to_ipa(text)
+        print(ipa_text)
         # Clean the IPA transcription
         if ipa_text:
-            cleaned_ipa = self.clean_ipa(ipa_text)
-            pinglish_text = self.ipa_to_pinglish_conversion(cleaned_ipa)
-            persian_text = self.pinglish_to_persian_conversion(pinglish_text)
-        else:
-            persian_text = self.pinglish_normalizer.normalize(english_text)
-            if persian_text in WEB_TO_FA.keys():
-                persian_text = WEB_TO_FA[persian_text]
-        persian_text = transliterate_abbreviations(persian_text)
-        
-        return persian_text
+            text = self.clean_ipa(ipa_text)
+            print(text)
+            text = self.ipa_to_pinglish_conversion(text)
+            text = self.pinglish_to_persian_conversion(text)
+        text = replace_web_words(text)
+        text = transliterate_abbreviations(text)
+        return text
