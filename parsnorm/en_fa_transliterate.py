@@ -238,7 +238,6 @@ class EnFaTransliterate:
         word = word.lower()
         if word in d:
             arpabet_transcription = d[word][0]  # Take the first pronunciation
-            print(arpabet_transcription)
             ipa_transcription = self.arpabet_to_ipa_conversion(arpabet_transcription)
             return ipa_transcription
         else:
@@ -363,11 +362,9 @@ class EnFaTransliterate:
         """Convert English text to Persian pronunciation."""
         # Convert English text to IPA
         ipa_text = self.word_to_ipa(text)
-        print(ipa_text)
         # Clean the IPA transcription
         if ipa_text:
             text = self.clean_ipa(ipa_text)
-            print(text)
             text = self.ipa_to_pinglish_conversion(text)
             text = self.pinglish_to_persian_conversion(text)
         text = replace_web_words(text)
