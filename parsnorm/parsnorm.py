@@ -87,7 +87,7 @@ class ParsNorm:
         return re.sub(r'\b[a-zA-Z]+\b', lambda match: self.en_fa_transliterater.normalizer(match.group(0).lower()), text)
     
     def normalize(self, text,
-                  clean_urls=True, clean_emails=True, 
+                  clean_urls=False, clean_emails=False, 
                   convert_time=True, convert_date=False,
                   alphabet_correction=True, semi_space_correction=True,
                   english_correction=False, html_correction=True, 
@@ -97,7 +97,7 @@ class ParsNorm:
                   repeated_punctuation_removal=True,
                   date_abbrev_replacement=True, persian_label_abbrev_replacement=True,
                   law_abbrev_replacement=True, book_abbrev_replacement=True, 
-                  other_abbrev_replacement=True, english_abbrev_replacement=True,
+                  other_abbrev_replacement=True,
                   number_conversion=True, en_fa_transliteration=True,
                   symbol_pronounciation=True,
                   hazm=True):
