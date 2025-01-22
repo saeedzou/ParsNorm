@@ -72,7 +72,7 @@ WEB_TO_FA = {
 
 # Map English IPA sequences to Pinglish equivalents
 IPA_TO_PINGLISH = {
-    "aɪ": "ai", "ɔɪ": "oy", "ʌ": "a", "oʊ": "o", "eɪ": "ey", "ɪŋ": "ing", "ɑː": "a", "æ": "æ", "ɑ":'a',
+    "aɪ": "ai", "ɔɪ": "oy", "ʌ": "a", "oʊ": "o", "eɪ": "ey", "ɪŋ": "ing", "ɑː": "a", "æ": "æ", "ɑ":'a', "ʌ0": "ʌ0",
     "e": "e", "i": "i", "o": "o", "ɒ": "a", "ɜː": "er", "ə": "e", "ɜ": "e", "ʊ": "u", "aʊ":"ow",
     "ɔː": "o", "uː": "u", "ɪ": "i", "ɛ": "e", "ɔ":"o",
     "l": "l", "v": "v", "p": "p", "r": "r",
@@ -91,6 +91,9 @@ PINGLISH_TO_PERSIAN = {
     "z": "ز", "t": "ت", "k": "ک", "d": "د",
     "f": "ف", "b": "ب", "n": "ن", "er": "ار", "e": "ی", "i": "ی",
     "u": "و", "a": "ا", "o": "او", "y": "ی",
+    "ʌ0_start": "اِ",
+    "ʌ0_middle": "ِ",
+    "ʌ0_end":'ا',
     "s_start":'اِس',
     "s_middle_end":"س",
     "ow_middle_end":'و',
@@ -126,7 +129,7 @@ ARPABET_TO_IPA = {
     'EH': 'e', 'EH0': 'e', 'EH1': 'e', 'EH2': 'e',
     'IH': 'ɪ', 'IH0': 'ɪ', 'IH1': 'ɪ', 'IH2': 'ɪ',
     'UH': 'ʊ', 'UH0': 'ʊ', 'UH1': 'ʊ', 'UH2': 'ʊ',
-    'AH': 'ʌ', 'AH0': 'ə', 'AH1': 'ʌ', 'AH2': 'ʌ',
+    'AH': 'ʌ', 'AH0': 'ʌ0', 'AH1': 'ʌ', 'AH2': 'ʌ',
     'AE': 'æ', 'AE0': 'æ', 'AE1': 'æ', 'AE2': 'æ',
     'AX': 'ə', 'AX0': 'ə', 'AX1': 'ə', 'AX2': 'ə',
 
@@ -285,6 +288,14 @@ class EnFaTransliterate:
                     match = "ae_end"
                 else:
                     match = "ae_middle"
+            elif pinglish_text[i:i+2] == 'ʌ0':
+                length = 2
+                if i == 0:
+                    match = "ʌ0_start"
+                elif i == len(pinglish_text) - 2:
+                    match = "ʌ0_end"
+                else:
+                    match = "ʌ0_middle"
             elif pinglish_text[i:i+2] == "ai":
                 length = 2
                 # Check position: Start, Middle, or End of the word
