@@ -216,13 +216,11 @@ def transliterate_abbreviations(text):
 
 
 class EnFaTransliterate:
-    def __init__(self, pinglish_normalizer):
+    def __init__(self):
         self.arpabet_to_ipa = ARPABET_TO_IPA
         self.web_to_fa = WEB_TO_FA
         self.ipa_to_pinglish = IPA_TO_PINGLISH
         self.pinglish_to_persian = PINGLISH_TO_PERSIAN
-
-        self.pinglish_normalizer = pinglish_normalizer
 
     # Convert ARPAbet transcription to IPA
     def arpabet_to_ipa_conversion(self, arpabet):

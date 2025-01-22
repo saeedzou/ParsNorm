@@ -21,7 +21,6 @@ ParsNorm
 import re
 
 from hazm import Normalizer as HazmNormalizer
-from parsivar import Normalizer as ParsiVarNormalizer
 from parsinorm import Mail_url_cleaner, Date_time_to_text, Abbreviation, Special_numbers
 from parsinorm import General_normalization as ParsiNormalizer
 from parsnorm.en_fa_transliterate import EnFaTransliterate
@@ -59,15 +58,13 @@ class ParsNorm:
     def __init__(self):
         self.hazm_norm = HazmNormalizer()
 
-        self.parsivar_norm = ParsiVarNormalizer(pinglish_conversion_needed=True)
-
         self.parsi_norm = ParsiNormalizer()
         self.mail_url_cleaner = Mail_url_cleaner()
         self.date_time_to_text = Date_time_to_text()
         self.abbreviation = Abbreviation()
         self.special_numbers = Special_numbers()
 
-        self.en_fa_transliterater = EnFaTransliterate(self.parsivar_norm)
+        self.en_fa_transliterater = EnFaTransliterate()
     
     def en_fa_transliterate(self, text):
         """
