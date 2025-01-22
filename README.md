@@ -7,7 +7,7 @@ One of its standout features is English-to-Persian Transliteration, which unique
 ## Features
 
 * **Unique English-to-Persian Transliteration**: Converts English words into their Persian phonetic equivalents, making this library a first of its kind.
-* **Advanced Normalization**: Handles Persian-specific text cleaning and correction using multiple libraries like hazm, parsivar, and parsinorm.
+* **Advanced Normalization**: Handles Persian-specific text cleaning and correction using multiple libraries like hazm, and parsinorm.
 * **Date and Time Conversion**: Converts dates and times into textual formats.
 * **Abbreviation Expansion**: Replaces common abbreviations with their full forms.
 * **Emoji and Special Character Removal**: Cleans text by removing emojis and other unwanted characters.
@@ -65,7 +65,6 @@ One of its standout features is English-to-Persian Transliteration, which unique
 * Libraries used:
 
     `hazm`
-    `parsivar`
     `parsinorm`
 
 ## Contributing

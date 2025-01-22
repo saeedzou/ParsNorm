@@ -13,7 +13,7 @@ https://arxiv.org/abs/2007.09127
 Classes
 -------
 ParsNorm
-    A class that integrates normalization functionalities from `hazm`, `parsivar`,
+    A class that integrates normalization functionalities from `hazm`, ``,
     `parsinorm`, and `english_to_persian_transliteration` to provide advanced
     text processing capabilities.
 
@@ -69,7 +69,7 @@ class ParsNorm:
     def en_fa_transliterate(self, text):
         """
         Transliterates English words in the input text to Persian equivalents.
-        It also converts Pinglish words to Persian using ParsiVarNormalizer
+        It also converts Pinglish words to Persian using Normalizer
 
         Parameters
         ----------

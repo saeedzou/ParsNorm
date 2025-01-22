@@ -769,7 +769,7 @@ class General_normalization:
         return sentence
 
     def space_correction(self, sentence):
-        ## This Function is a mixture of HAZM and ParsiVar Features
+        ## This Function is a mixture of HAZM Features
         punc_after, punc_before = r'\.:!،؛؟»\]\)\}', r'«\[\(\{'
         sentence = re.sub(r'^(بی|می|نمی)( )', r'\1‌', sentence)  # verb_prefix
         sentence = re.sub(r'( )(می|نمی)( )', r'\1\2‌ ', sentence)  # verb_prefix
