@@ -81,7 +81,7 @@ class ParsNorm:
         str
             Text with English words transliterated to Persian.
         """
-        return re.sub(r'\b[a-zA-Z]+\b', lambda match: self.en_fa_transliterater.normalizer(match.group(0).lower()), text)
+        return re.sub(r"\b[a-zA-Z]+(?:'[a-zA-Z]+)?\b", lambda match: self.en_fa_transliterater.normalizer(match.group(0).lower()), text)
     
     def normalize(self, text,
                   clean_urls=False, clean_emails=False, 
