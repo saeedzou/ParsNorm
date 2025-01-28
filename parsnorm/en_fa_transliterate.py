@@ -70,127 +70,120 @@ WEB_TO_FA = {
     "error": "ارور"
 }
 
-# Map English IPA sequences to Pinglish equivalents
-IPA_TO_PINGLISH = {
-    "aɪ": "ai", "ɔɪ": "oy", "ʌ": "a", "oʊ": "o", "eɪ": "ey", "ɪŋ": "ing", "ɑː": "a", "æ": "æ", "ɑ":'a', "ʌ0": "ʌ0",
-    "e": "e", "i": "i", "o": "o", "ɒ": "a", "ɜː": "er", "ə": "e", "ɜ": "e", "ʊ": "u", "aʊ":"ow",
-    "ɔː": "o", "uː": "u", "ɪ": "i", "ɛ": "e", "ɔ":"o",
-    "l": "l", "v": "v", "p": "p", "r": "r",
-    "g": "g", "m": "m", "h": "h", "ŋg": "ng",
-    "w": "v", "j": "y", "u": "u", "tʃ": "ch", "dʒ": "j",
-    "ʃ": "sh", "ʒ": "zh", "θ": "th1", "ð": "th2", "ŋ": "ng",
-    "z": "z", "t": "t", "s": "s", "k": "k", "d": "d",
-    "f": "f", "b": "b", "n": "n",
-}
-
-# Map Pinglish to Persian equivalents
-PINGLISH_TO_PERSIAN = {
-    "l": "ل", "v": "و", "p": "پ", "r": "ر",
-    "o": "و", "g": "گ", "m": "م", "h": "ه", "ei": "ای", "ing": "ینگ",
-    "ch": "چ", "sh": "ش", "zh": "ژ", "th1": "ت", "th2": "د", "j": "ج", "ng": "نگ",
-    "z": "ز", "t": "ت", "k": "ک", "d": "د",
-    "f": "ف", "b": "ب", "n": "ن", "er": "ار", "e": "ی", "i": "ی",
-    "u": "و", "a": "ا", "o": "او", "y": "ی",
-    "ʌ0_start": "اِ",
-    "ʌ0_middle": "ِ",
-    "ʌ0_end":'ا',
-    "s_start":'اِس',
-    "s_middle_end":"س",
-    "ow_middle_end":'و',
-    "ow_start":'او',
-    # Mapping for 'ae' with two cases
-    "ae_start": "اَ",  # For the start of the word
-    "ae_middle": "َ",  # For the middle of the word
-    "ae_end":"ه",
-    "a_start": "آ",
-    "a_middle_end": "ا",
-    # Mapping for 'o' with two cases
-    "o_start": "اُ",   # For the start of the word
-    "o_middle": "و",   # For the middle of the word
-    "o_end": "و",
-    # Mapping for 'e' with two cases
-    "e_start": "اِ",   # For the start of the word
-    "e_middle": "ِ",   # For the middle of the word
-    "e_end": "ه",
-    # Mapping for "i"
-    "i_start": "ای",   # For the start of the word
-    "i_middle_end": "ی", # For the middle or end of the word
-    # Mapping for "ai"
-    "ai_start": "آی",  # For the start of the word
-    "ai_middle_end": "ای", # For the middle of the word
-}
-# ARPAbet to IPA mapping
-ARPABET_TO_IPA = {
+# ARPAbet to PERSIAN mapping
+ARPABET_TO_PERSIAN = {
     # Vowels - Monophthongs
-    'AO': 'ɔ', 'AO0': 'ɔ', 'AO1': 'ɔ', 'AO2': 'ɔ',
-    'AA': 'ɑ', 'AA0': 'ɑ', 'AA1': 'ɑ', 'AA2': 'ɑ',
-    'IY': 'i', 'IY0': 'i', 'IY1': 'i', 'IY2': 'i',
-    'UW': 'u', 'UW0': 'u', 'UW1': 'u', 'UW2': 'u',
-    'EH': 'e', 'EH0': 'e', 'EH1': 'e', 'EH2': 'e',
-    'IH': 'ɪ', 'IH0': 'ɪ', 'IH1': 'ɪ', 'IH2': 'ɪ',
-    'UH': 'ʊ', 'UH0': 'ʊ', 'UH1': 'ʊ', 'UH2': 'ʊ',
-    'AH': 'ʌ', 'AH0': 'ʌ0', 'AH1': 'ʌ', 'AH2': 'ʌ',
-    'AE': 'æ', 'AE0': 'æ', 'AE1': 'æ', 'AE2': 'æ',
-    'AX': 'ə', 'AX0': 'ə', 'AX1': 'ə', 'AX2': 'ə',
+    'AO': 'ُ', 'AO0': 'ُ', 'AO1': 'ُ', 'AO2': 'ُ',
+    'AA': 'ا', 'AA0': 'ا', 'AA1': 'ا', 'AA2': 'ا',
+    'IY': 'ی', 'IY0': 'ی', 'IY1': 'ی', 'IY2': 'ی',
+    'UW': 'و', 'UW0': 'و', 'UW1': 'و', 'UW2': 'و',
+    'EH': 'ِ', 'EH0': 'ِ', 'EH1': 'ِ', 'EH2': 'ِ',
+    'IH': 'ی', 'IH0': 'ی', 'IH1': 'ی', 'IH2': 'ی',
+    'UH': 'و', 'UH0': 'و', 'UH1': 'و', 'UH2': 'و',
+    'AH': 'ا', 'AH0': 'ا', 'AH1': 'ا', 'AH2': 'ا',
+    'AE': 'َ', 'AE0': 'َ', 'AE1': 'َ', 'AE2': 'َ',
+    'AX': 'ِ', 'AX0': 'ِ', 'AX1': 'ِ', 'AX2': 'ِ',
 
     # Vowels - Diphthongs
-    'EY': 'eɪ', 'EY0': 'eɪ', 'EY1': 'eɪ', 'EY2': 'eɪ',
-    'AY': 'aɪ', 'AY0': 'aɪ', 'AY1': 'aɪ', 'AY2': 'aɪ',
-    'OW': 'oʊ', 'OW0': 'oʊ', 'OW1': 'oʊ', 'OW2': 'oʊ',
-    'AW': 'aʊ', 'AW0': 'aʊ', 'AW1': 'aʊ', 'AW2': 'aʊ',
-    'OY': 'ɔɪ', 'OY0': 'ɔɪ', 'OY1': 'ɔɪ', 'OY2': 'ɔɪ',
-
+    'EY': 'ِی', 'EY0': 'ِی', 'EY1': 'ِی', 'EY2': 'ِی',
+    'AY': 'ای', 'AY0': 'ای', 'AY1': 'ای', 'AY2': 'ای',
+    'OW': 'ُ', 'OW0': 'ُ', 'OW1': 'ُ', 'OW2': 'ُ',
+    'AW': 'و', 'AW0': 'و', 'AW1': 'و', 'AW2': 'و',
+    'OY': 'ُی', 'OY0': 'ُی', 'OY1': 'ُی', 'OY2': 'ُی',
     # Consonants - Stops
-    'P': 'p', 'B': 'b', 'T': 't', 'D': 'd', 'K': 'k', 'G': 'g',
+    'P': 'پ', 'B': 'ب', 'T': 'ت', 'D': 'د', 'K': 'ک', 'G': 'گ',
 
     # Consonants - Affricates
-    'CH': 'tʃ', 'JH': 'dʒ',
+    'CH': 'چ', 'JH': 'ج',
 
     # Consonants - Fricatives
-    'F': 'f', 'V': 'v', 'TH': 'θ', 'DH': 'ð', 'S': 's', 'Z': 'z',
-    'SH': 'ʃ', 'ZH': 'ʒ', 'HH': 'h',
+    'F': 'ف', 'V': 'و', 'TH': 'ت', 'DH': 'د', 'S': 'س', 'Z': 'ز',
+    'SH': 'ش', 'ZH': 'ژ', 'HH': 'ه',
 
     # Consonants - Nasals
-    'M': 'm', 'N': 'n', 'NG': 'ŋ',
+    'M': 'م', 'N': 'ن', 'NG': 'نگ',
 
     # Consonants - Liquids
-    'L': 'l', 'R': 'r',
+    'L': 'ل', 'R': 'ر',
 
     # Vowels - R-colored vowels
-    'ER': 'ɜr', 'ER0': 'ɜr', 'ER1': 'ɜr', 'ER2': 'ɜr',
-    'AXR': 'ər', 'AXR0': 'ər', 'AXR1': 'ər', 'AXR2': 'ər',
-
+    'ER': 'ِر', 'ER0': 'ِر', 'ER1': 'ِر', 'ER2': 'ِر',
+    'AXR': 'ِر', 'AXR0': 'ِر', 'AXR1': 'ِر', 'AXR2': 'ِر',
     # Consonants - Semivowels
-    'W': 'w', 'Y': 'j',
+    'W': 'و', 'Y': 'ی',
+}
+
+START_DIACRITICS = {
+    'AO': 'اُ', 'AO0': 'اُ', 'AO1': 'اُ', 'AO2': 'اُ',
+    'AA': 'آ', 'AA0': 'آ', 'AA1': 'آ', 'AA2': 'آ',
+    'IY': 'ای', 'IY0': 'ای', 'IY1': 'ای', 'IY2': 'ای',
+    'UW': 'او', 'UW0': 'او', 'UW1': 'او', 'UW2': 'او',
+    'EH': 'اِ', 'EH0': 'اِ', 'EH1': 'اِ', 'EH2': 'اِ',
+    'IH': 'ای', 'IH0': 'ای', 'IH1': 'ای', 'IH2': 'ای',
+    'UH': 'او', 'UH0': 'او', 'UH1': 'او', 'UH2': 'او',
+    'AH': 'ا', 'AH0': 'ا', 'AH1': 'ا', 'AH2': 'ا',
+    'AE': 'اَ', 'AE0': 'اَ', 'AE1': 'اَ', 'AE2': 'اَ',
+    'AX': 'اِ', 'AX0': 'اِ', 'AX1': 'اِ', 'AX2': 'اِ',
+    'EY': 'اِی', 'EY0': 'اِی', 'EY1': 'اِی', 'EY2': 'اِی',
+    'AY': 'آی', 'AY0': 'آی', 'AY1': 'آی', 'AY2': 'آی',
+    'OW': 'اُ', 'OW0': 'اُ', 'OW1': 'اُ', 'OW2': 'اُ',
+    'AW': 'او', 'AW0': 'او', 'AW1': 'او', 'AW2': 'او',
+    'OY': 'اُی', 'OY0': 'اُی', 'OY1': 'اُی', 'OY2': 'اُی',
+    'ER': 'اِر', 'ER0': 'اِر', 'ER1': 'اِر', 'ER2': 'اِر',
+    'AXR': 'اِر', 'AXR0': 'اِر', 'AXR1': 'اِر', 'AXR2': 'اِر',
+}
+
+END_DIACRITICS = {
+    'AO': 'و', 'AO0': 'و', 'AO1': 'و', 'AO2': 'و',
+    'AA': 'ا', 'AA0': 'ا', 'AA1': 'ا', 'AA2': 'ا',
+    'IY': 'ی', 'IY0': 'ی', 'IY1': 'ی', 'IY2': 'ی',
+    'UW': 'و', 'UW0': 'و', 'UW1': 'و', 'UW2': 'و',
+    'EH': 'ه', 'EH0': 'ه', 'EH1': 'ه', 'EH2': 'ه',
+    'IH': 'ی', 'IH0': 'ی', 'IH1': 'ی', 'IH2': 'ی',
+    'UH': 'و', 'UH0': 'و', 'UH1': 'و', 'UH2': 'و',
+    'AH': 'ا', 'AH0': 'ا', 'AH1': 'ا', 'AH2': 'ا',
+    'AE': 'ه', 'AE0': 'ه', 'AE1': 'ه', 'AE2': 'ه',
+    'AX': 'ه', 'AX0': 'ه', 'AX1': 'ه', 'AX2': 'ه',
+    'EY': 'ِی', 'EY0': 'ِی', 'EY1': 'ِی', 'EY2': 'ِی',
+    'AY': 'ای', 'AY0': 'ای', 'AY1': 'ای', 'AY2': 'ای',
+    'OW': 'و', 'OW0': 'و', 'OW1': 'و', 'OW2': 'و',
+    'AW': 'و', 'AW0': 'و', 'AW1': 'و', 'AW2': 'و',
+    'OY': 'وی', 'OY0': 'وی', 'OY1': 'وی', 'OY2': 'وی',
+    'ER': 'ِر', 'ER0': 'ِر', 'ER1': 'ِر', 'ER2': 'ِر',
+    'AXR': 'ِر', 'AXR0': 'ِر', 'AXR1': 'ِر', 'AXR2': 'ِر',
+}
+
+S_SPECIAL = {
+    'S': 'اِس', 'S0': 'اِس', 'S1': 'اِس', 'S2': 'اِس',
 }
 
 ENG_CHAR_TO_PER = {
-    'a': 'ای',
+    'a': 'اِی',
     'b': 'بی',
     'c': 'سی',
     'd': 'دی',
     'e': 'ای',
     'f': 'اف',
     'g': 'جی',
-    'h': 'اچ',
+    'h': 'اِچ',
     'i': 'آی',
-    'j': 'جی',
-    'k': 'کی',
-    'l': 'ال',
-    'm': 'ام',
-    'n': 'ان',
+    'j': 'جِی',
+    'k': 'کِی',
+    'l': 'اِل',
+    'm': 'اِم',
+    'n': 'اِن',
     'o': 'او',
     'p': 'پی',
     'q': 'کیو',
     'r': 'آر',
-    's': 'اس',
+    's': 'اِس',
     't': 'تی',
     'u': 'یو',
     'v': 'وی',
     'w': 'دابلیو',
     'x': 'ایکس',
     'y': 'وای',
-    'z': 'زد',
+    'z': 'زِد',
 }
 
 def replace_web_words(text):
@@ -220,162 +213,46 @@ def transliterate_abbreviations(text):
 
 class EnFaTransliterate:
     def __init__(self):
-        self.arpabet_to_ipa = ARPABET_TO_IPA
         self.web_to_fa = WEB_TO_FA
-        self.ipa_to_pinglish = IPA_TO_PINGLISH
-        self.pinglish_to_persian = PINGLISH_TO_PERSIAN
 
-    # Convert ARPAbet transcription to IPA
-    def arpabet_to_ipa_conversion(self, arpabet):
-        ipa_transcription = ""
-        for symbol in arpabet:
-            ipa_transcription += self.arpabet_to_ipa.get(symbol, symbol)  # Default to symbol if not found
-        return ipa_transcription
+    def en_fa_transliterate(self, word):
+        # Transliterate
+        persian = ''
+        for idx, phoneme in enumerate(word):
+            if idx == 0 and phoneme in START_DIACRITICS:
+                persian += START_DIACRITICS[phoneme]
+            elif idx == len(word) - 1 and phoneme in END_DIACRITICS:
+                persian += END_DIACRITICS[phoneme]
+            elif idx == 0 and phoneme in S_SPECIAL and idx < len(word) - 1:
+                if word[idx + 1] not in START_DIACRITICS:
+                    persian += S_SPECIAL[phoneme]
+                else:
+                    persian += ARPABET_TO_PERSIAN[phoneme]
+            elif phoneme in ARPABET_TO_PERSIAN:
+                persian += ARPABET_TO_PERSIAN[phoneme]
+            else:
+                persian += phoneme
 
-
+        return persian
+    
     # Function to convert word to IPA using CMU Pronouncing Dictionary and ARPAbet to IPA conversion
-    def word_to_ipa(self, word, d=pronouncing_dict):
+    def transliterate(self, word, d=pronouncing_dict):
         # Get ARPAbet transcription from CMU dictionary
         word = word.lower()
         if word in d:
             arpabet_transcription = d[word][0]  # Take the first pronunciation
-            ipa_transcription = self.arpabet_to_ipa_conversion(arpabet_transcription)
+            ipa_transcription = self.en_fa_transliterate(arpabet_transcription)
             return ipa_transcription
         else:
             return None
 
-
-    def clean_ipa(self, ipa_text):
-        """Remove stress markers and extraneous symbols from IPA."""
-        stress_markers = ['ˈ', 'ˌ']
-        for marker in stress_markers:
-            ipa_text = ipa_text.replace(marker, "")
-        return ipa_text
-
-    def ipa_to_pinglish_conversion(self, ipa_text):
-        """Convert IPA sequences to Pinglish."""
-        pinglish = ""
-        i = 0
-        while i < len(ipa_text):
-            match = None
-            # Try to match the longest IPA pattern from the current position
-            for ipa_seq in sorted(self.ipa_to_pinglish.keys(), key=len, reverse=True):
-                if ipa_text[i:i+len(ipa_seq)] == ipa_seq:
-                    match = ipa_seq
-                    break
-            if match:
-                pinglish += self.ipa_to_pinglish[match]
-                i += len(match)  # Move forward by the length of the match
-            else:
-                pinglish += ipa_text[i]  # Preserve unmatched characters
-                i += 1
-        return pinglish
-
-
-    def pinglish_to_persian_conversion(self, pinglish_text):
-        """Convert Pinglish to Persian."""
-        persian = ""
-        i = 0
-        while i < len(pinglish_text):
-            length = 1
-            match = None
-            # Check for 'ae', 'o', or 'e' at the start, middle, or end of a word
-            if pinglish_text[i:i+1] == "æ":
-                # Check position: Start, Middle, or End of the word
-                if i == 0:
-                    match = "ae_start"
-                elif i == len(pinglish_text) - 1:
-                    match = "ae_end"
-                else:
-                    match = "ae_middle"
-            elif pinglish_text[i:i+2] == 'ʌ0':
-                length = 2
-                if i == 0:
-                    match = "ʌ0_start"
-                elif i == len(pinglish_text) - 2:
-                    match = "ʌ0_end"
-                else:
-                    match = "ʌ0_middle"
-            elif pinglish_text[i:i+2] == "ai":
-                length = 2
-                # Check position: Start, Middle, or End of the word
-                if i == 0:
-                    match = "ai_start"
-                else:
-                    match = "ai_middle_end"
-            elif pinglish_text[i:i+2] == "ow":
-                length = 2
-                # Check position: Start, Middle, or End of the word
-                if i == 0:
-                    match = "ow_start"
-                else:
-                    match = "ow_middle_end"
-            elif pinglish_text[i:i+2] == "sh":
-                length = 2
-                # Check position: Start, Middle, or End of the word
-                match = "sh"
-            elif pinglish_text[i:i+1] == "a":
-                if i == 0:
-                    match = "a_start"
-                else:
-                    match = "a_middle_end"
-            elif pinglish_text[i:i+1] == "o":
-                # Check position: Start, Middle, or End of the word
-                if i == 0:
-                    match = "o_start"
-                elif i == len(pinglish_text) - 1:
-                    match = "o_end"
-                else:
-                    match = "o_middle"
-            elif pinglish_text[i:i+1] == "e":
-                # Check position: Start, Middle, or End of the word
-                if i == 0:
-                    match = "e_start"
-                elif i == len(pinglish_text) - 1:
-                    match = "e_end"
-                else:
-                    match = "e_middle"
-            elif pinglish_text[i:i+1] == "i":
-                # Check position: Start, Middle, or End of the word
-                if i == 0:
-                    match = "i_start"
-                else:
-                    match = "i_middle_end"
-            elif pinglish_text[i:i+1] == "s":
-                # Check position: Start, Middle, or End of the word
-                if i == 0 and pinglish_text[i+1] not in "aeouiæ":
-                    match = "s_start"
-                else:
-                    match = "s_middle_end"
-            
-            # If a match is found, add the corresponding Persian equivalent
-            if match:
-                persian += self.pinglish_to_persian[match]
-                i += length  # Move forward by the length of the match
-            else:
-                # Try to match the longest Pinglish pattern
-                for pinglish_seq in sorted(self.pinglish_to_persian.keys(), key=len, reverse=True):
-                    if pinglish_text[i:i+len(pinglish_seq)] == pinglish_seq:
-                        match = pinglish_seq
-                        break
-                if match:
-                    persian += self.pinglish_to_persian[match]
-                    i += len(match)
-                else:
-                    persian += pinglish_text[i]  # Preserve unmatched characters
-                    i += 1
-        return persian
-
-
     def normalizer(self, text):
         """Convert English text to Persian pronunciation."""
         # Convert English text to IPA
-        ipa_text = self.word_to_ipa(text)
+        transliterated = self.transliterate(text)
         # Clean the IPA transcription
-        if ipa_text:
-            text = self.clean_ipa(ipa_text)
-            text = self.ipa_to_pinglish_conversion(text)
-            text = self.pinglish_to_persian_conversion(text)
+        if transliterated:
+            text = transliterated
         text = replace_web_words(text)
         text = transliterate_abbreviations(text)
         return text
