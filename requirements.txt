@@ -1,5 +1,6 @@
 hazm
 nltk
 num2fawords
+git+https://github.com/saeedzou/num2words.git
 persian-tools
 urlextract
