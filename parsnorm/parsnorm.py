@@ -19,7 +19,8 @@ ParsNorm
 
 """
 import re
-
+import string
+from num2words import num2words as words
 from hazm import Normalizer as HazmNormalizer
 from parsinorm import Mail_url_cleaner, Date_time_to_text, Abbreviation, Special_numbers
 from parsinorm import General_normalization as ParsiNormalizer
@@ -65,6 +66,21 @@ class ParsNorm:
         self.special_numbers = Special_numbers()
 
         self.en_fa_transliterater = EnFaTransliterate()
+        self.num_pattern = r'\b\d+(\.\d+)?\b'
+        self.chars_to_ignore = [
+            ",", ".", "!", "-", ";", ":", '""', "%", "'", '"', "�",
+            "#", "!", "؟", "?", "«", "»", "،", "(", ")", "؛", "'ٔ", "٬",'ٔ', ",", "?",
+            ".", "!", "-", ";", ":",'"',"“", "%", "‘", "”", "�", "–", "…", "_", "”", '“', '„',
+            'ā', 'š', '\[', '\]', '{', '}', '؟', '*', 
+        ]
+
+
+        self.chars_to_ignore = self.chars_to_ignore + list(string.ascii_lowercase + string.digits)
+        self.chars_to_ignore_regex = f"""[{"".join(map(str, self.chars_to_ignore))}]"""
+    
+    def remove_special_characters(self, text):
+        text = re.sub(self.chars_to_ignore_regex, '', text).lower() + " "
+        return text
     
     def en_fa_transliterate(self, text):
         """
@@ -84,12 +100,11 @@ class ParsNorm:
         return re.sub(r"\b[a-zA-Z]+(?:'[a-zA-Z]+)?\b", lambda match: self.en_fa_transliterater.normalizer(match.group(0).lower()), text)
     
     def normalize(self, text,
-                  clean_urls=False, clean_emails=False, 
                   convert_time=True, convert_date=False,
                   alphabet_correction=True, semi_space_correction=True,
-                  english_correction=False, html_correction=True, 
+                  english_correction=False,
                   arabic_correction=True, punctuation_correction=True, 
-                  special_chars_removal=True, emoji_removal=True, 
+                  special_chars_removal=True, 
                   comma_between_numbers_removal=True, number_correction=True, 
                   repeated_punctuation_removal=True,
                   date_abbrev_replacement=True, persian_label_abbrev_replacement=True,
@@ -97,7 +112,7 @@ class ParsNorm:
                   other_abbrev_replacement=True,
                   number_conversion=True, en_fa_transliteration=True,
                   symbol_pronounciation=True,
-                  hazm=True):
+                  hazm=True, remove_punct=True):
         """
         Normalizes the input text using a combination of cleaning, correction, and
         conversion techniques.
@@ -106,10 +121,6 @@ class ParsNorm:
         ----------
         text : str
             The input text to be normalized.
-        clean_urls : bool, optional
-            If True, removes URLs from the text. Default is True.
-        clean_emails : bool, optional
-            If True, removes email addresses from the text. Default is True.
         convert_time : bool, optional
             If True, converts times to their textual representation. Default is True.
         convert_date : bool, optional
@@ -120,10 +131,6 @@ class ParsNorm:
             If True, corrects semi-spaces in the text. Default is True.
         english_correction : bool, optional
             If True, corrects English text in the input. Default is False.
-        html_correction : bool, optional
-            If True, fixes HTML issues in the text. Default is True.
-        arabic_correction : bool, optional
-            If True, corrects Arabic characters in the text. Default is True.
         punctuation_correction : bool, optional
             If True, corrects punctuation issues in the text. Default is True.
         special_chars_removal : bool, optional
@@ -146,8 +153,6 @@ class ParsNorm:
             If True, replaces book abbreviations. Default is True.
         other_abbrev_replacement : bool, optional
             If True, replaces other abbreviations. Default is True.
-        english_abbrev_replacement : bool, optional
-            If True, replaces English abbreviations. Default is True.
         number_conversion : bool, optional
             If True, converts numbers to textual form. Default is True.
         en_fa_transliteration : bool, optional
@@ -156,17 +161,13 @@ class ParsNorm:
             If True, replaces symbols with their pronounciation. Default is True.
         hazm : bool, optional
             If True, applies hazm normalization. Default is True.
-
+        remove_punct : bool, optional
+            If True, removes special characters from the text. Default is True.
         Returns
         -------
         str
             The normalized text.
         """
-        if clean_urls:
-            text = self.mail_url_cleaner.find_urls_clean(text)
-        if clean_emails:
-            text = self.mail_url_cleaner.find_mails_clean(text)
-
         if convert_time:
             text = self.date_time_to_text.time_to_text(text)
         if convert_date:
@@ -184,16 +185,12 @@ class ParsNorm:
             text = self.parsi_norm.semi_space_correction(text)
         if english_correction:
             text = self.parsi_norm.english_correction(text)
-        if html_correction:
-            text = self.parsi_norm.html_correction(text)
         if arabic_correction:
             text = self.parsi_norm.arabic_correction(text)
         if punctuation_correction:
             text = self.parsi_norm.punctuation_correction(text)
         if special_chars_removal:
             text = self.parsi_norm.specials_chars(text)
-        if emoji_removal:
-            text = self.parsi_norm.remove_emojis(text)
         if comma_between_numbers_removal:
             text = self.parsi_norm.remove_comma_between_numbers(text)
         if number_correction:
@@ -211,6 +208,7 @@ class ParsNorm:
             text = self.abbreviation.replace_other_abbreviation(text)
 
         if number_conversion:
+            text = re.sub(self.num_pattern, lambda match: words(float(match.group(0)), lang='fa'), text)
             text = self.special_numbers.convert_numbers_to_text(text)
 
         if en_fa_transliteration:
@@ -219,4 +217,7 @@ class ParsNorm:
         if hazm:
             text = self.hazm_norm.normalize(text)
 
-        return text
+        if remove_punct:
+            text = self.remove_special_characters(text)
+        text = re.sub(" +", " ", text)
+        return text.strip()
