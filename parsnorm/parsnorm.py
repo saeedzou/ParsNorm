@@ -226,7 +226,6 @@ class ParsNorm:
             self.allowed_chars_regex = f"[^{self.allowed_chars}]"
 
         text = self.substitute_symbols(text)
-        print(text)
         text = self.keep_allowed_chars(text)
 
         text = re.sub(" +", " ", text).strip()
