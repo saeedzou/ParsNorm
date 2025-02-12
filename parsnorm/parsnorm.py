@@ -56,7 +56,7 @@ class ParsNorm:
         Performs normalization on the given text based on provided options.
 
     """
-    def __init__(self):
+    def __init__(self, allowed_puncts='!(),-.:;? ̠،؛؟‌<>«»'):
         self.hazm_norm = HazmNormalizer()
 
         self.parsi_norm = ParsiNormalizer()
@@ -67,20 +67,24 @@ class ParsNorm:
 
         self.en_fa_transliterater = EnFaTransliterate()
         self.num_pattern = r'\b\d+(\.\d+)?\b'
-        self.chars_to_ignore = [
-            ",", ".", "!", "-", ";", ":", '""', "%", "'", '"', "�",
-            "#", "!", "؟", "?", "«", "»", "،", "(", ")", "؛", "'ٔ", "٬",'ٔ', ",", "?",
-            ".", "!", "-", ";", ":",'"',"“", "%", "‘", "”", "�", "–", "…", "_", "”", '“', '„',
-            'ā', 'š', '\[', '\]', '{', '}', '؟', '*', 
-        ]
+
+        self.allowed_puncts = allowed_puncts
+        self.allowed_chars = "آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی"
+        self.allowed_chars += "أةئۀإؤء"
+        # add space and half-space \u200c and newline
+        self.allowed_chars += " \u200c\n"
+        self.allowed_chars_regex = f"[^{self.allowed_chars}]"
+
+        self.substitution_dict = {'ﯽ': 'ی', '—': '–', '\u200f': '\u200c', '\xad': '\u200c', '\u200e': '\u200c', '\u200d': '\u200c'}
+        self.translation_table = str.maketrans(self.substitution_dict)
 
 
-        self.chars_to_ignore = self.chars_to_ignore + list(string.ascii_lowercase + string.digits)
-        self.chars_to_ignore_regex = f"""[{"".join(map(str, self.chars_to_ignore))}]"""
+    def substitute_symbols(self, text):
+        substituted_text = text.translate(self.translation_table)
+        return substituted_text
     
-    def remove_special_characters(self, text):
-        text = re.sub(self.chars_to_ignore_regex, '', text).lower() + " "
-        return text
+    def keep_allowed_chars(self, text):
+        return re.sub(self.allowed_chars_regex, '', text)
     
     def en_fa_transliterate(self, text):
         """
@@ -217,7 +221,13 @@ class ParsNorm:
         if hazm:
             text = self.hazm_norm.normalize(text)
 
-        if remove_punct:
-            text = self.remove_special_characters(text)
-        text = re.sub(" +", " ", text)
-        return text.strip()
+        if not remove_punct:
+            self.allowed_chars += self.allowed_puncts
+            self.allowed_chars_regex = f"[^{self.allowed_chars}]"
+
+        text = self.substitute_symbols(text)
+        print(text)
+        text = self.keep_allowed_chars(text)
+
+        text = re.sub(" +", " ", text).strip()
+        return text
