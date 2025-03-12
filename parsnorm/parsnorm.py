@@ -116,7 +116,7 @@ class ParsNorm:
                   other_abbrev_replacement=True,
                   number_conversion=True, en_fa_transliteration=True,
                   symbol_pronounciation=True,
-                  hazm=True, remove_punct=True):
+                  hazm=True, remove_punct=True, keep_allowed_chars=True):
         """
         Normalizes the input text using a combination of cleaning, correction, and
         conversion techniques.
@@ -176,7 +176,7 @@ class ParsNorm:
             text = self.date_time_to_text.time_to_text(text)
         if convert_date:
             text = self.date_time_to_text.date_to_text(text)
-        
+
         if repeated_punctuation_removal:
             text = self.parsi_norm.remove_repeated_punctuation(text)
         if symbol_pronounciation:
@@ -224,9 +224,9 @@ class ParsNorm:
         if not remove_punct:
             self.allowed_chars += self.allowed_puncts
             self.allowed_chars_regex = f"[^{self.allowed_chars}]"
-
-        text = self.substitute_symbols(text)
-        text = self.keep_allowed_chars(text)
+        if keep_allowed_chars:
+            text = self.substitute_symbols(text)
+            text = self.keep_allowed_chars(text)
 
         text = re.sub(" +", " ", text).strip()
         return text
