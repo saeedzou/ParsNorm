@@ -84,7 +84,7 @@ class ParsNorm:
         return substituted_text
     
     def keep_allowed_chars(self, text):
-        return re.sub(self.allowed_chars_regex, '', text)
+        return re.sub(self.allowed_chars_regex, ' ', text)
     
     def en_fa_transliterate(self, text):
         """
