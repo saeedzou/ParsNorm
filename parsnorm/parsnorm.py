@@ -83,8 +83,8 @@ class ParsNorm:
         substituted_text = text.translate(self.translation_table)
         return substituted_text
     
-    def keep_allowed_chars(self, text):
-        return re.sub(self.allowed_chars_regex, ' ', text)
+    def keep_allowed_chars(self, text, allowed_chars_regex):
+        return re.sub(allowed_chars_regex, ' ', text)
     
     def en_fa_transliterate(self, text):
         """
@@ -222,11 +222,14 @@ class ParsNorm:
             text = self.hazm_norm.normalize(text)
 
         if not remove_punct:
-            self.allowed_chars += self.allowed_puncts
-            self.allowed_chars_regex = f"[^{self.allowed_chars}]"
+            temp_allowed_chars = self.allowed_chars + self.allowed_puncts
+            temp_allowed_chars_regex = f"[^{temp_allowed_chars}]"
+        else:
+            temp_allowed_chars = self.allowed_chars
+            temp_allowed_chars_regex = self.allowed_chars_regex
         if keep_allowed_chars:
             text = self.substitute_symbols(text)
-            text = self.keep_allowed_chars(text)
+            text = self.keep_allowed_chars(text, temp_allowed_chars_regex)
 
         text = re.sub(" +", " ", text).strip()
         return text
