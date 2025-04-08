@@ -3,8 +3,6 @@ import nltk
 import os
 from nltk.corpus import cmudict
 
-nltk_data_dir = os.getenv("NLTK_DATA", "./nltk_data")
-nltk.download("cmudict", download_dir=nltk_data_dir)
 # Load the CMU Pronouncing Dictionary
 pronouncing_dict = cmudict.dict()
 
