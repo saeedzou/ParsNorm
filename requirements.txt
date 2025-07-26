@@ -1,4 +1,4 @@
-hazm
+git+https://github.com/saeedzou/hazm.git
 nltk
 num2fawords
 git+https://github.com/saeedzou/num2words.git
