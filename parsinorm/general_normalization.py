@@ -700,9 +700,9 @@ class General_normalization:
 
     def unique_floating_point(self, sentence):
         sentence = self.number_correction(sentence=sentence)
-        floating_points_with_slash = re.findall('[۰-۹]+/[۰-۹]+', sentence)
-        floating_points_with_comma = re.findall('[۰-۹]+,[۰-۹]+', sentence)
-        floating_points_with_comma2 = re.findall('[۰-۹]+،[۰-۹]+', sentence)
+        floating_points_with_slash = re.findall(r'[۰-۹]+/[۰-۹]+', sentence)
+        floating_points_with_comma = re.findall(r'[۰-۹]+,[۰-۹]+', sentence)
+        floating_points_with_comma2 = re.findall(r'[۰-۹]+،[۰-۹]+', sentence)
         if floating_points_with_slash:
             for floating_point_with_slash in floating_points_with_slash:
                 floating_point_with_slash_new = floating_point_with_slash.replace("/", ".")
@@ -719,12 +719,12 @@ class General_normalization:
 
     def remove_comma_between_numbers(self, sentence):
         sentence = self.number_correction(sentence=sentence)
-        floating_points_with_comma1 = re.findall('[۰-۹]+٬[۰-۹]+', sentence)
+        floating_points_with_comma1 = re.findall(r'[۰-۹]+٬[۰-۹]+', sentence)
         if floating_points_with_comma1:
             for floating_point_with_comma1 in floating_points_with_comma1:
                 floating_point_with_comma_new1 = floating_point_with_comma1.replace("٬", "")
                 sentence = sentence.replace(str(floating_point_with_comma1), floating_point_with_comma_new1)
-        floating_points_with_comma2 = re.findall('[۰-۹]+٫[۰-۹]+', sentence)
+        floating_points_with_comma2 = re.findall(r'[۰-۹]+٫[۰-۹]+', sentence)
         if floating_points_with_comma2:
             for floating_point_with_comma2 in floating_points_with_comma2:
                 floating_point_with_comma_new2 = floating_point_with_comma2.replace("٫", "")

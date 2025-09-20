@@ -46,11 +46,11 @@ class Tokenizer:
         )
 
     def replace_other(self, sentence):
-        others = re.findall('و\.\.\.', sentence)
+        others = re.findall(r'و\.\.\.', sentence)
         if others:
             for other in others:
                 sentence = sentence.replace(str(other), "و غیره")
-        more_dots = re.findall('\.\.+', sentence)
+        more_dots = re.findall(r'\.\.+', sentence)
         if more_dots:
             for more_dot in more_dots:
                 sentence = sentence.replace(str(more_dot), " ")

@@ -28,7 +28,7 @@ class Special_numbers:
 
     def convert_numbers_to_text(self, sentence):
         sentence = self.general_normalization.number_correction(sentence=sentence)
-        between_nums = re.findall('[۰-۹]+\s?-\s?[۰-۹]+', sentence)
+        between_nums = re.findall(r'[۰-۹]+\s?-\s?[۰-۹]+', sentence)
         if between_nums:
             for between_num in between_nums:
                 between_num_new = copy.copy(between_num)
@@ -37,7 +37,7 @@ class Special_numbers:
                     between_num_new = between_num_new.replace(str(number), self.convert_number_to_letter(number))
             sentence = sentence.replace(str(between_num), between_num_new)
             sentence = sentence.replace("-", "خط تیره")
-        floating_points = re.findall('[۰-۹]+\.[۰-۹]+', sentence)
+        floating_points = re.findall(r'[۰-۹]+\.[۰-۹]+', sentence)
         for floating_point in floating_points:
             floating_point_new = ""
             natural_number = floating_point.split(".")[0]
@@ -49,13 +49,13 @@ class Special_numbers:
                 floating_point_new = words(str(floating_point_new), decimal_separator=' ممیز ')
             else:
                 floating_point_new = words(str(floating_point), decimal_separator=' ممیز ')
-            zero = re.findall('^[0|۰]*[0|۰]$', exp_number)
+            zero = re.findall(r'^[0|۰]*[0|۰]$', exp_number)
             if zero:
                 sentence = sentence.replace(str(floating_point), self.convert_number_to_letter(natural_number))
 
             # if exp_number == 0 or exp_number
             sentence = sentence.replace(str(floating_point), floating_point_new)
-        numbers = re.findall('[۰-۹]+', sentence)
+        numbers = re.findall(r'[۰-۹]+', sentence)
         for index in range(len(numbers)):
             numbers[index] = int(numbers[index])
         numbers.sort(reverse=True)
@@ -105,7 +105,7 @@ class Special_numbers:
 
     def replace_national_code(self, sentence):
         sentence = self.general_normalization.number_correction(sentence=sentence)
-        numbers = re.findall('[۰-۹]{10}', sentence)
+        numbers = re.findall(r'[۰-۹]{10}', sentence)
         for number in numbers:
             if national_id.validate(number):
                 number_converted_to_text = self.special_number_to_text(number, "National_ID")
@@ -114,7 +114,7 @@ class Special_numbers:
 
     def replace_card_number(self, sentence):
         sentence = self.general_normalization.number_correction(sentence=sentence)
-        numbers = re.findall('[۰-۹]{16}', sentence)
+        numbers = re.findall(r'[۰-۹]{16}', sentence)
         for number in numbers:
             if card_number.validate(number):
                 number_converted_to_text = self.special_number_to_text(number, "card_number")
@@ -123,7 +123,7 @@ class Special_numbers:
 
     def replace_shaba(self, sentence):
         sentence = self.general_normalization.number_correction(sentence=sentence)
-        numbers = re.findall('IR[۰-۹]{24}', sentence)
+        numbers = re.findall(r'IR[۰-۹]{24}', sentence)
         for number in numbers:
             if sheba.validate(number):
                 number_new = number[2:]

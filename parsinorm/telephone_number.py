@@ -12,62 +12,62 @@ class Telephone_number:
     def find_phones_replace(self, sentence):
         sentence = self.general_normalization.number_correction(sentence=sentence)
         telephones = []
-        numbers_with_telephone1 = re.findall('تلفن: [۰-۹]+', sentence)
+        numbers_with_telephone1 = re.findall(r'تلفن: [۰-۹]+', sentence)
         if numbers_with_telephone1:
             telephones.extend(numbers_with_telephone1)
-        numbers_with_telephone2 = re.findall('تلفن [۰-۹]+', sentence)
+        numbers_with_telephone2 = re.findall(r'تلفن [۰-۹]+', sentence)
         if numbers_with_telephone2:
             telephones.extend(numbers_with_telephone2)
-        numbers_with_telephone3 = re.findall(' و [۰-۹]+ تلفن های  [۰-۹]+', sentence)
+        numbers_with_telephone3 = re.findall(r' و [۰-۹]+ تلفن های  [۰-۹]+', sentence)
         if numbers_with_telephone3:
             telephones.extend(numbers_with_telephone3)
-        numbers_with_telephone4 = re.findall('تلفن های [۰-۹]+ و [۰-۹]+', sentence)
+        numbers_with_telephone4 = re.findall(r'تلفن های [۰-۹]+ و [۰-۹]+', sentence)
         if numbers_with_telephone4:
             telephones.extend(numbers_with_telephone4)
-        numbers_with_telephone5 = re.findall('تلفنهای [۰-۹]+ و [۰-۹]+', sentence)
+        numbers_with_telephone5 = re.findall(r'تلفنهای [۰-۹]+ و [۰-۹]+', sentence)
         if numbers_with_telephone5:
             telephones.extend(numbers_with_telephone5)
-        numbers_with_telephone6 = re.findall('فکس [۰-۹]+', sentence)
+        numbers_with_telephone6 = re.findall(r'فکس [۰-۹]+', sentence)
         if numbers_with_telephone6:
             telephones.extend(numbers_with_telephone6)
-        numbers_with_telephone7 = re.findall('فاکس [۰-۹]+', sentence)
+        numbers_with_telephone7 = re.findall(r'فاکس [۰-۹]+', sentence)
         if numbers_with_telephone7:
             telephones.extend(numbers_with_telephone7)
-        numbers_with_telephone8 = re.findall('۰۹[۰-۹]{9}', sentence)
+        numbers_with_telephone8 = re.findall(r'۰۹[۰-۹]{9}', sentence)
         if numbers_with_telephone8:
             telephones.extend(numbers_with_telephone8)
-        numbers_with_telephone9 = re.findall('۰۲۱[۰-۹]{8}', sentence)
+        numbers_with_telephone9 = re.findall(r'۰۲۱[۰-۹]{8}', sentence)
         if numbers_with_telephone9:
             telephones.extend(numbers_with_telephone9)
-        numbers_with_telephone10 = re.findall('۰۲۱-[۰-۹]{8}', sentence)
+        numbers_with_telephone10 = re.findall(r'۰۲۱-[۰-۹]{8}', sentence)
         if numbers_with_telephone10:
             telephones.extend(numbers_with_telephone10)
-        numbers_with_telephone11 = re.findall('۰۲۱-[۰-۹]+', sentence)
+        numbers_with_telephone11 = re.findall(r'۰۲۱-[۰-۹]+', sentence)
         if numbers_with_telephone11:
             telephones.extend(numbers_with_telephone11)
-        numbers_with_telephone12 = re.findall('۰۲۱[۰-۹]+', sentence)
+        numbers_with_telephone12 = re.findall(r'۰۲۱[۰-۹]+', sentence)
         if numbers_with_telephone12:
             telephones.extend(numbers_with_telephone12)
-        numbers_with_telephone13 = re.findall('تلفن \+[۰-۹]+', sentence)
+        numbers_with_telephone13 = re.findall(r'تلفن \+[۰-۹]+', sentence)
         if numbers_with_telephone13:
             telephones.extend(numbers_with_telephone13)
-        numbers_with_telephone14 = re.findall('تلفن [۰-۹]+\s?-\s?[۰-۹]+', sentence)
+        numbers_with_telephone14 = re.findall(r'تلفن [۰-۹]+\s?-\s?[۰-۹]+', sentence)
         if numbers_with_telephone14:
             telephones.extend(numbers_with_telephone14)
-        numbers_with_telephone15 = re.findall('شماره تماس: [۰-۹]+', sentence)
+        numbers_with_telephone15 = re.findall(r'شماره تماس: [۰-۹]+', sentence)
         if numbers_with_telephone15:
             telephones.extend(numbers_with_telephone15)
-        numbers_with_telephone16 = re.findall('سامانه پیامکی: [۰-۹]+', sentence)
+        numbers_with_telephone16 = re.findall(r'سامانه پیامکی: [۰-۹]+', sentence)
         if numbers_with_telephone16:
             telephones.extend(numbers_with_telephone16)
-        numbers_with_telephone17 = re.findall(' شماره: [۰-۹]+', sentence)
+        numbers_with_telephone17 = re.findall(r' شماره: [۰-۹]+', sentence)
         if numbers_with_telephone17:
             telephones.extend(numbers_with_telephone17)
-        numbers_with_telephone18 = re.findall(' شماره [۰-۹]+', sentence)
+        numbers_with_telephone18 = re.findall(r' شماره [۰-۹]+', sentence)
         if numbers_with_telephone18:
             telephones.extend(numbers_with_telephone18)
         for telephone in telephones:
-            tels = re.findall('\+?[۰-۹]+', telephone)
+            tels = re.findall(r'\+?[۰-۹]+', telephone)
             for tel in tels:
                 sentence = sentence.replace(tel, self.number_with_varaible_length(str(tel)))
         return sentence
