@@ -7,7 +7,7 @@ extractor = URLExtract()
 class Mail_url_cleaner:
 
     def find_urls_clean(self, sentence):
-        urls_start_www = re.findall("www.\s?[\sa-z0-9.-]+[.][\sa-z]{2,4}/?", sentence)
+        urls_start_www = re.findall(r"www.\s?[\sa-z0-9.-]+[.][\sa-z]{2,4}/?", sentence)
         if urls_start_www:
             for url in urls_start_www:
                 old_url = url
@@ -16,7 +16,7 @@ class Mail_url_cleaner:
                 url = url.split("/")[0]
                 sentence = sentence.replace(str(old_url), str(url))
 
-        urls_start_http = re.findall("https?://www.\s?[\sa-z0-9.-]+[.][\sa-z]{2,4}/?", sentence)
+        urls_start_http = re.findall(r"https?://www.\s?[\sa-z0-9.-]+[.][\sa-z]{2,4}/?", sentence)
         if urls_start_http:
             for url in urls_start_http:
                 old_url = url
