@@ -638,7 +638,7 @@ class General_normalization:
                                      "a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h",
                                      "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", "o", "O", "p",
                                      "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x",
-                                     "X", "y", "Y", "z", "Z", "\u200c", "\u200e", "\s", "،", ".", "(", ")", "!",
+                                     "X", "y", "Y", "z", "Z", "\u200c", "\u200e", "\\s", "،", ".", "(", ")", "!",
                                      "؟", ":", " ", ""]
 
         self.special_persian_characters_h = {'ۀ': 'ه', 'ة': 'ه'}
@@ -733,7 +733,7 @@ class General_normalization:
 
     def space_between_punctuations_and_text(self, sentence):
         sentence = re.sub('([.,!?()])', r' \1 ', sentence)
-        sentence = re.sub('\s{2,}', ' ', sentence)
+        sentence = re.sub(r'\s{2,}', ' ', sentence)
         return sentence
 
     def remove_repeated_punctuation(self, sentence):
@@ -781,12 +781,12 @@ class General_normalization:
                                       r'بندی|کننده|کنندگان|گیری|پرداز|پردازی|پردازان|آمیز|سنجی|ریزی|داری|دهنده|آمیز|پذیری' \
                                       r'|پذیر|پذیران|گر|ریز|ریزی|رسانی|یاب|یابی|گانه|گانه‌ای|انگاری|گا|بند|رسانی|دهندگان|دار)( )'
         sentence = re.sub(complex_word_suffix_pattern, r'‌\2\3', sentence)
-        sentence = re.sub(' ([^\n"]+) ', r'\1', sentence)  # remove space before and after quotation
-        sentence = re.sub(' ([' + punc_after + '])', r'\1', sentence)  # remove space before
-        sentence = re.sub('([' + punc_before + ']) ', r'\1', sentence)  # remove space after
-        sentence = re.sub('([' + punc_after[:3] + '])([^ ' + punc_after + '\d۰۱۲۳۴۵۶۷۸۹])', r'\1 \2',
+        sentence = re.sub(r' ([^\n"]+) ', r'\1', sentence)  # remove space before and after quotation
+        sentence = re.sub(r' ([' + punc_after + '])', r'\1', sentence)  # remove space before
+        sentence = re.sub(r'([' + punc_before + ']) ', r'\1', sentence)  # remove space after
+        sentence = re.sub(r'([' + punc_after[:3] + '])([^ ' + punc_after + '\d۰۱۲۳۴۵۶۷۸۹])', r'\1 \2',
                           sentence)  # put space after . and :
-        sentence = re.sub('([' + punc_after[3:] + '])([^ ' + punc_after + '])', r'\1 \2', sentence)  # put space after
-        sentence = re.sub('([^ ' + punc_before + '])([' + punc_before + '])', r'\1 \2', sentence)
+        sentence = re.sub(r'([' + punc_after[3:] + '])([^ ' + punc_after + '])', r'\1 \2', sentence)  # put space after
+        sentence = re.sub(r'([^ ' + punc_before + '])([' + punc_before + '])', r'\1 \2', sentence)
         return sentence
 
