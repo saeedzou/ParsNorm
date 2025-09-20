@@ -15,8 +15,5 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    install_requires=[  # List the external dependencies
-        'hazm',  # Example dependencies
-    ],
     python_requires='>=3.6',
 )
