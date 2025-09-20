@@ -784,7 +784,7 @@ class General_normalization:
         sentence = re.sub(r' ([^\n"]+) ', r'\1', sentence)  # remove space before and after quotation
         sentence = re.sub(r' ([' + punc_after + '])', r'\1', sentence)  # remove space before
         sentence = re.sub(r'([' + punc_before + ']) ', r'\1', sentence)  # remove space after
-        sentence = re.sub(r'([' + punc_after[:3] + '])([^ ' + punc_after + '\d۰۱۲۳۴۵۶۷۸۹])', r'\1 \2',
+        sentence = re.sub(r'([' + punc_after[:3] + '])([^ ' + punc_after + r'\d۰۱۲۳۴۵۶۷۸۹])', r'\1 \2',
                           sentence)  # put space after . and :
         sentence = re.sub(r'([' + punc_after[3:] + '])([^ ' + punc_after + '])', r'\1 \2', sentence)  # put space after
         sentence = re.sub(r'([^ ' + punc_before + '])([' + punc_before + '])', r'\1 \2', sentence)
